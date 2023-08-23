@@ -84,14 +84,16 @@ buttons.forEach((button) => {
     } else if (buttonClicked == "=") {
       // if the button is Equal
       if (
-        lastClick == buttonClicked ||
-        operatorArray.includes(getLastCharacter(previous.innerHTML))
-      ) {
+        lastClick == buttonClicked)
+       {
         // if we click equal two times in a row
         // or if the last character of previous is an operator
         //ignore the click
       } else {
         lastClick = buttonClicked;
+        if(current.innerHTML == ""){
+            current.innerHTML = "0";
+        }
         previous.innerHTML += current.innerHTML;
         current.innerHTML = eval(previous.innerHTML);
       }
@@ -115,7 +117,17 @@ buttons.forEach((button) => {
       lastClick = buttonClicked;
     } else if(buttonClicked == "+/-"){
         lastClick = buttonClicked;
-        
+        if( current.innerHTML != "0"){
+            //if the current isn't a ZERO
+            if(current.innerHTML.charAt(0) != "-"){
+                //if the current is not negative we add the minus operator
+                current.innerHTML = "-" + current.innerHTML;
+            }else{
+                // if the current is negative we delete the minus operator
+                current.innerHTML = current.innerHTML.slice(1);
+            }
+            
+        }
     }
   });
 });
