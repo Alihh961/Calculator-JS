@@ -92,6 +92,14 @@ buttons.forEach((button) => {
         previous.innerHTML += current.innerHTML;
         current.innerHTML = eval(previous.innerHTML);
       }
+    } else if (buttonClicked == "."){
+        if(!containsADecimal(current.innerHTML)){
+            //if it doesn't contain a decimal point
+
+            lastClick = buttonClicked;
+            current.innerHTML += buttonClicked;
+        }
+        //ignore the click if it contains a decimal 
     }
   });
 });
