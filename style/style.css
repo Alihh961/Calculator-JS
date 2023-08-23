@@ -14,10 +14,13 @@ body {
 
 .current{
     background-color: green;
+    min-height: 18.5px;
+
 }
 
 .previous{
     background-color: red;
+    min-height: 18.5px;
 }
 
 section {
