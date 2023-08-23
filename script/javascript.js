@@ -57,8 +57,7 @@ buttons.forEach((button) => {
           } else if (buttonClicked == "-") {
           }
         } else {
-
-            //if the last click is not an operator
+          //if the last click is not an operator
           lastClick = buttonClicked;
           previous.innerHTML = current.innerHTML + buttonClicked;
           current.innerHTML = "";
@@ -84,22 +83,39 @@ buttons.forEach((button) => {
       previous.innerHTML = "";
     } else if (buttonClicked == "=") {
       // if the button is Equal
-      if (lastClick == buttonClicked) {
+      if (
+        lastClick == buttonClicked ||
+        operatorArray.includes(getLastCharacter(previous.innerHTML))
+      ) {
         // if we click equal two times in a row
+        // or if the last character of previous is an operator
         //ignore the click
       } else {
         lastClick = buttonClicked;
         previous.innerHTML += current.innerHTML;
         current.innerHTML = eval(previous.innerHTML);
       }
-    } else if (buttonClicked == "."){
-        if(!containsADecimal(current.innerHTML)){
-            //if it doesn't contain a decimal point
+    } else if (buttonClicked == ".") {
+      if (!containsADecimal(current.innerHTML)) {
+        //if it doesn't contain a decimal point
 
-            lastClick = buttonClicked;
-            current.innerHTML += buttonClicked;
-        }
-        //ignore the click if it contains a decimal 
+        lastClick = buttonClicked;
+        current.innerHTML += buttonClicked;
+      }
+      //ignore the click if it contains a decimal
+    } else if (buttonClicked == "DEL") {
+      // if the button clicked is DEL
+
+      if (current.innerHTML.length == 1) {
+        //if the current contains only one number
+        current.innerHTML = "0";
+      } else {
+        current.innerHTML = current.innerHTML.slice(0, -1);
+      }
+      lastClick = buttonClicked;
+    } else if(buttonClicked == "+/-"){
+        lastClick = buttonClicked;
+        
     }
   });
 });
