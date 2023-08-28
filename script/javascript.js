@@ -17,6 +17,7 @@ buttons.forEach((button) => {
     let classList = event.target.classList;
 
     switch (true) {
+
       case classList.contains("number"):
         // if the button is a number
         handleNumberClick(operatorArray, previous, current, buttonClicked);
@@ -96,6 +97,7 @@ buttons.forEach((button) => {
         }
         break;
     }
+
   });
 });
 
@@ -187,6 +189,7 @@ function handleOperatorClick(lastClick, buttonClicked, current, previous) {
       ) {
         //ignore the click
       } else if (buttonClicked == "-") {
+        console.log("fklg");
       }
     } else {
       //if the last click is not an operator
@@ -197,8 +200,7 @@ function handleOperatorClick(lastClick, buttonClicked, current, previous) {
   } else {
     if (isAnOperator(getLastCharacter(previous.innerHTML))) {
       // if the last char of the previous is an operator
-      previous.innerHTML += current.innerHTML;
-      previous.innerHTML = eval(previous.innerHTML);
+      previous.innerHTML = evaluateExpression(previous.innerHTML);
       previous.innerHTML += buttonClicked;
       current.innerHTML = "";
       lastClick = buttonClicked;
@@ -209,3 +211,12 @@ function handleOperatorClick(lastClick, buttonClicked, current, previous) {
     }
   }
 }
+
+function evaluateExpression(expression) {
+  try {
+    return new Function('return (' + expression + ')')();
+  } catch (error) {
+    return expression; // Return the original expression on error
+  }
+}
+
